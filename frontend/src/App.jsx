@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import{BrowserRouter as Router,Routes,Route,Navigate,useParams} from "react-router-dom";
+//components
+import Login from './components/login/login';
+import Home from './components/home/Home';
+import Navbar from "./components/navbar/navbar";
+import { Children } from "react";
+
+  //  authorized router uncomment later;
+// const PrivateRoute=({ children }) => {
+//   const{ username: usernameFromUrl }=useParams(); //get username from url
+//   const token=localStorage.getItem('token');
+//   const usernameFromStorage=localStorage.getItem('tokenUser');
+
+//   if(!token || usernameFromUrl !==usernameFromStorage){
+//     localStorage.removeItem('token');
+//     localStorage.removeItem('tokenUser');
+//     return <Navigate to ="/unauthorizedAccess"/>
+//   }
+//   return children;
+// };
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="bg-gradient-to-bl from-blue-500">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  return(
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login"element={<Login/>}/>
+        {/* sign up */}
+        {/* aboutus */}
+        {/* etc etc */}
+      </Routes>
+    </Router>
+   
+  );
+  
 }
 
-export default App
+export default App;
