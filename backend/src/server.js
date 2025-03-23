@@ -1,9 +1,11 @@
 //dependencies
 import express from "express";
 import mongoose from "mongoose";
-import Connection from "./database/db.js";
 import dotenv from 'dotenv';
 dotenv.config();
+
+//src comp
+import Connection from "./database/db.js";
 
 
 
