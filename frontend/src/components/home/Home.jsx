@@ -7,12 +7,12 @@ import Navbar from '../navbar/navbar';
 const Home = () => {
     return(
         <div>
-            <div className="bg-gradient-to-t from-35% from-gray-900"><Navbar /></div>
+            <Navbar />
             <div className='mt-20'>
-            <Home1 />
-            <Home2 />
-            <Home3 />   
-        </div>
+                <Home1 />
+                <Home2 />
+                <Home3 />   
+            </div>
         </div>
     )
 }

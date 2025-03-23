@@ -67,7 +67,7 @@ const Navbar = () => {
 
   return (
     
-    <div className="rounded-b-2xl bg-gradient-to-b from-black w-full z-50 shadow-lg h-17 ">
+    <div className="rounded-b-2xl bg-gradient-to-b from-gray-900 to-gray-800 w-full z-50 shadow-lg h-17 ">
       <header className="relative inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
