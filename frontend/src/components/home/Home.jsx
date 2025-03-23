@@ -7,7 +7,7 @@ import Navbar from '../navbar/navbar';
 const Home = () => {
     return(
         <div>
-            <Navbar />
+            <div className="bg-gradient-to-t from-35% from-gray-900"><Navbar /></div>
             <div className='mt-20'>
             <Home1 />
             <Home2 />

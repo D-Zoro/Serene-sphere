@@ -67,8 +67,8 @@ const Navbar = () => {
 
   return (
     
-    <div className="bg-white w-full z-50 shadow-lg">
-      <header className="absolute inset-x-0 top-0 z-50">
+    <div className="rounded-b-2xl bg-gradient-to-b from-black w-full z-50 shadow-lg h-17 ">
+      <header className="relative inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
             <a href="/" className="-m-1.5 p-1.5">
@@ -130,11 +130,11 @@ const Navbar = () => {
         {mobileMenuOpen && (
           <div className="lg:hidden" role="dialog" aria-modal="true">
             <div className="fixed inset-0 z-50"></div>
-            <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
               <div className="flex items-center justify-between">
-                <a href="#" className="-m-1.5 p-1.5">
-                  <span className="sr-only">Your Company</span>
-                  <img className="h-8 w-auto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQZrRgwuKA5JrFS4glBVgzvmPDhhPjWrObr-D01xeKZQ&s" alt="Your Company" />
+                <a href="/" className="-m-1.5 p-1.5">
+                  <span className="sr-only">Serene Sphere</span>
+                  <img className="h-8 w-auto" src={applogo} alt="Serene Sphere" />
                 </a>
                 <button
                   type="button"
