@@ -3,7 +3,7 @@ import { userLogin, userSignup } from '../controllers/user-controller.js';
 import passport from 'passport';
 import '../config/passportConfig.js';
 import multer from 'multer';
-import upload from '../multer/multerConfig.js';
+import upload from '../config/multerConfig.js';
 import cors from 'cors';
 
 const router =express.Router();
