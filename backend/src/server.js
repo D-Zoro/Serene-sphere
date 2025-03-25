@@ -13,7 +13,7 @@ import path from "path";
 import bodyParser from "body-parser";
 
 //src comp
-import Connection from "./database/db.js";
+import Connection from "./config/mongodbconfig.js";
 import userRoutes from './routes/route.js';
 
 
