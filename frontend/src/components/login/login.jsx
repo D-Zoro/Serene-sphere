@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import SpotlightBox from '../reactcomp/SpotlightBox';
 
 const Login=()=>{
     const [username, setUsername] = useState('');
@@ -19,7 +20,7 @@ const Login=()=>{
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('tokenUser', response.data.user.username);
           navigate(`/`);
-        } catch (err) {
+        } catch (_err) {
           setError('Invalid username or password');
         }
       };
@@ -30,6 +31,7 @@ const Login=()=>{
 };
 
 return (
+  
     <div className="flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       {error && (           
         // error message shows up if thers an error
@@ -60,9 +62,9 @@ return (
         </div>
       )}
       <div className="w-screen mt-32">
-        <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-md">
-          <div className="px-6 py-4" style={{ background: 'linear-gradient(to right, #D1D5DB, #E5E7EB, #F3F4F6)' }}>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2 text-center">Sign in to your account</h2>
+        <div className="max-w-md mx-auto  rounded-lg overflow-hidden shadow-md">
+          <SpotlightBox>
+            <h2 className="text-2xl font-bold text-blue-700 mb-2 text-center font-serif">Login</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
@@ -125,10 +127,11 @@ return (
                 Go back
               </a>
             </p>
-          </div>
+            </SpotlightBox>
         </div>
       </div>
     </div>
+    
   );
 };
 

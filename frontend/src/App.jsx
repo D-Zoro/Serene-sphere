@@ -13,19 +13,19 @@ import Navbar from "./components/navbar/Navbar";
 import { Children } from "react";
 import AboutUs from "./components/Aboutus/Aboutus";
 
-//  authorized router uncomment later;
-// const PrivateRoute=({ children }) => {
-//   const{ username: usernameFromUrl }=useParams(); //get username from url
-//   const token=localStorage.getItem('token');
-//   const usernameFromStorage=localStorage.getItem('tokenUser');
+ //authorized router uncomment later;
+const PrivateRoute=({ children }) => {
+  const{ username: usernameFromUrl }=useParams(); //get username from url
+  const token=localStorage.getItem('token');
+  const usernameFromStorage=localStorage.getItem('tokenUser');
 
-//   if(!token || usernameFromUrl !==usernameFromStorage){
-//     localStorage.removeItem('token');
-//     localStorage.removeItem('tokenUser');
-//     return <Navigate to ="/unauthorizedAccess"/>
-//   }
-//   return children;
-// };
+  if(!token || usernameFromUrl !==usernameFromStorage){
+    localStorage.removeItem('token');
+    localStorage.removeItem('tokenUser');
+    return <Navigate to ="/unauthorizedAccess"/>
+  }
+  return children;
+};
 
 function App() {
   return (
