@@ -2,25 +2,31 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Login = () => {
+const SignUp = () => {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
     try {
-      const response = await axios.post("http://localhost:8000/login", {
+      const response = await axios.post("http://localhost:8000/signup", {
         username,
+        email,
         password,
       });
       console.log(response);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("tokenUser", response.data.user.username);
       navigate(`/`);
     } catch (err) {
-      setError("Invalid username or password" + err);
+      setError("Error during signup. Please try again." + err);
     }
   };
 
@@ -31,7 +37,6 @@ const Login = () => {
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       {error && (
-        // error message shows up if thers an error
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div
             className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
@@ -86,7 +91,7 @@ const Login = () => {
             }}
           >
             <h2 className="text-2xl font-bold text-gray-800 mb-2 text-center">
-              Sign in to your account
+              Create your account
             </h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
@@ -110,6 +115,24 @@ const Login = () => {
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <input
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="email"
+                  type="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="email"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="password"
                 >
                   Password
@@ -121,7 +144,25 @@ const Login = () => {
                   placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="current-password"
+                  autoComplete="new-password"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="confirmPassword"
+                >
+                  Confirm Password
+                </label>
+                <input
+                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="confirmPassword"
+                  type="password"
+                  placeholder="Confirm password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  autoComplete="new-password"
                   required
                 />
               </div>
@@ -131,7 +172,9 @@ const Login = () => {
                   type="button"
                   onClick={() => {
                     setUsername("");
+                    setEmail("");
                     setPassword("");
+                    setConfirmPassword("");
                   }}
                 >
                   Cancel
@@ -140,17 +183,17 @@ const Login = () => {
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
-                  Sign in
+                  Sign up
                 </button>
               </div>
             </form>
             <p className="mt-10 text-center text-sm text-gray-500">
-              Not a member?{" "}
+              Already a member?{" "}
               <a
-                href="/signup"
+                href="/login"
                 className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
               >
-                Signup Now
+                Login Now
               </a>
             </p>
             <p className="text-center text-sm text-gray-500">
@@ -169,4 +212,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
