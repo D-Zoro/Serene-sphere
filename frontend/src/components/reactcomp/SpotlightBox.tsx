@@ -21,18 +21,18 @@ const Spotlight = ({ children }: SpotlightProps) => {
     mouseY.set(clientY - top);
   }
 
-  const background = useMotionTemplate`radial-gradient(650px circle at ${mouseX}px ${mouseY}px, rgba(14, 165, 233, 0.15), transparent 80%)`;
+  const background = useMotionTemplate`radial-gradient(650px circle at ${mouseX}px ${mouseY}px, rgba(225, 128, 186, 0.2), rgba(0,0, 0, 0.6))`;
 
   return (
     <div
-      className="group relative w-auto h-auto rounded-xl border border-white/10 bg-gray-900 px-8 py-16 shadow-2xl"
+      className="group relative w-auto h-auto rounded-xl border border-gray-400/20 bg-gradient-to-tr from-gray-800 to-gray-900 px-8 py-16 shadow-lg"
       onMouseMove={handleMouseMove}
     >
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
         style={{ background }}
       />
-      <div>{children}</div> {/* Wrap the children here */}
+      <div className="text-gray-700">{children}</div> {/* Wrap the children here */}
     </div>
   );
 };
