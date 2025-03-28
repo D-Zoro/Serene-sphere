@@ -12,6 +12,7 @@ import Home from "./components/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import { Children } from "react";
 import AboutUs from "./components/Aboutus/Aboutus";
+import SignUp from "./components/signup/Signup";
 
 //  authorized router uncomment later;
 // const PrivateRoute=({ children }) => {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/signup" element={<SignUp />} />
         {/* sign up */}
         {/* aboutus */}
         {/* etc etc */}
