@@ -14,6 +14,7 @@ import Navbar from "./components/navbar/Navbar";
 import { Children } from "react";
 import AboutUs from "./components/Aboutus/Aboutus";
 import NoAccess from "./components/UnauthorizedAccess/UnauthorizedAccess";
+import Signup from "./components/Signup/Signup";
 
  //authorized router uncomment later;
 const PrivateRoute=({ children }) => {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/unauthorizedAccess" element={<NoAccess/>}/>
         {/* sign up */}
         {/* aboutus */}
