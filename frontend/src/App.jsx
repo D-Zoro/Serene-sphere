@@ -9,7 +9,6 @@ import {
 
 //components
 import Login from "./components/login/login";
-import Signup from "./components/signup/signup";
 import Home from "./components/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import { Children } from "react";
