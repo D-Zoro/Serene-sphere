@@ -1,58 +1,18 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
-import Spotlight from '../reactcomp/SpotlightBox';
+import React from 'react'
 
 const NoAccess = () => {
-  const navigate = useNavigate();
-
-  const handleBackToLogin = () => {
-    navigate('/login');
-  };
-
   return (
-    <Spotlight>
-    <section className=" min-h-screen min-w-screen flex flex-col justify-center items-center">
-      
-      <div className="relative py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-        {/* Decorative Icon */}
-        <div className="absolute top-10 left-10">
-          <ExclamationTriangleIcon className="h-16 w-16 text-white opacity-20" />
+    <section className="bg-white dark:bg-gray-900 min-h-screen flex flex-col justify-center items-center">
+        <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+          <div className="mx-auto max-w-screen-sm text-center">
+            <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 dark:text-primary-500">ACCESS DENIED</h1>
+            <p className="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">You are not allowed to view this page.</p>
+            <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">Sorry, you are not allowed to view this page. LogIn Again. </p>
+            <a href="/login" className="inline-flex text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4">Back to LogIn</a>
+          </div>   
         </div>
-        <div className="absolute bottom-10 right-10">
-          <ExclamationTriangleIcon className="h-16 w-16 text-white opacity-20 rotate-180" />
-        </div>
-
-        <div className="mx-auto max-w-screen-sm text-center">
-         
-          <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-white drop-shadow-lg">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300">
-              ACCESS DENIED
-            </span>
-          </h1>
-
-         
-          <p className="mb-4 text-3xl tracking-tight font-bold text-white md:text-4xl">
-            You are not allowed to view this page.
-          </p>
-
-         
-          <p className="mb-6 text-lg font-light text-gray-200">
-            Sorry, you are not allowed to view this page. Please log in again to continue.
-          </p>
-
-         
-          <button
-            onClick={handleBackToLogin}
-            className="inline-flex items-center justify-center text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-6 py-3 transition-transform transform hover:scale-105 shadow-lg"
-          >
-            Back to Login
-          </button>
-        </div>
-      </div>
-    </section>
-    </Spotlight>
-  );
-};
+      </section>
+  )
+}
 
 export default NoAccess;
