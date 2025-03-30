@@ -136,7 +136,7 @@ const Login = () => {
               </div>
               <div className="flex items-center justify-between">
                 <button
-                  className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-gray-500 transition-transform transform hover:scale-105 hover:bg-gray-600 duration-500"
+                  className="bg-gray-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-gray-500 transition-transform transform hover:scale-105 hover:bg-gray-600 duration-500"
                   type="button"
                   onClick={() => {
                     setUsername('');
@@ -146,7 +146,7 @@ const Login = () => {
                   Cancel
                 </button>
                 <button
-                  className="bg-pink-300 hover:bg-pink-400 text-white font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-pink-500 transition-transform transform hover:scale-110 hover:bg-pink-500 duration-500"
+                  className="bg-pink-300  text-white font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-pink-500 transition-transform transform hover:scale-110 hover:bg-pink-500 duration-500"
                   type="submit"
                 >
                   Sign in
