@@ -6,6 +6,7 @@ import {
   Navigate,
   useParams,
 } from "react-router-dom";
+
 //components
 import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
@@ -13,20 +14,22 @@ import Home from "./components/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import { Children } from "react";
 import AboutUs from "./components/Aboutus/Aboutus";
+import NoAccess from "./components/UnauthorizedAccess/UnauthorizedAccess";
+import Signup from "./components/Signup/Signup";
 
-//  authorized router uncomment later;
-// const PrivateRoute=({ children }) => {
-//   const{ username: usernameFromUrl }=useParams(); //get username from url
-//   const token=localStorage.getItem('token');
-//   const usernameFromStorage=localStorage.getItem('tokenUser');
+ //authorized router uncomment later;
+const PrivateRoute=({ children }) => {
+  const{ username: usernameFromUrl }=useParams(); //get username from url
+  const token=localStorage.getItem('token');
+  const usernameFromStorage=localStorage.getItem('tokenUser');
 
-//   if(!token || usernameFromUrl !==usernameFromStorage){
-//     localStorage.removeItem('token');
-//     localStorage.removeItem('tokenUser');
-//     return <Navigate to ="/unauthorizedAccess"/>
-//   }
-//   return children;
-// };
+  if(!token || usernameFromUrl !==usernameFromStorage){
+    localStorage.removeItem('token');
+    localStorage.removeItem('tokenUser');
+    return <Navigate to ="/unauthorizedAccess"/>
+  }
+  return children;
+};
 
 function App() {
   return (
@@ -36,6 +39,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/unauthorizedAccess" element={<NoAccess/>}/>
+        {/* sign up */}
         {/* aboutus */}
         {/* etc etc */}
       </Routes>
