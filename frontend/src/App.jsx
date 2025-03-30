@@ -9,7 +9,6 @@ import {
 
 //components
 import Login from "./components/login/login";
-import Signup from "./components/signup/signup";
 import Home from "./components/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import { Children } from "react";
@@ -37,7 +36,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/aboutus" element={<AboutUs/>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/unauthorizedAccess" element={<NoAccess/>}/>
         {/* sign up */}
