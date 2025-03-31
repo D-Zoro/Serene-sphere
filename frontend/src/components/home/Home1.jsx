@@ -2,7 +2,7 @@ import React from 'react'
 
 const Home1 = () => {
     return (
-      <div className="relative isolate px-6 pt-7 lg:px-8 ">
+      <div className="relative isolate px-6 pt-7 lg:px-8 h-screen">
           <div
             className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
             aria-hidden="true"

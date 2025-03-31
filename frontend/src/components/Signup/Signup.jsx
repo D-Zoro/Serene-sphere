@@ -339,7 +339,7 @@ export default function Signup() {
                         </button>
                         <button
                             type="submit"
-                            className="bg-pink-300 hover:bg-pink-400 text-white font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-pink-500 transition-transform transform hover:scale-110  duration-500">
+                            className="bg-pink-400 hover:bg-pink-500 text-white font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-pink-600 transition-transform transform hover:scale-110  duration-500">
                             Save
                         </button>
                     </div>

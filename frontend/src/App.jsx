@@ -15,6 +15,7 @@ import { Children } from "react";
 import AboutUs from "./components/Aboutus/Aboutus";
 import NoAccess from "./components/UnauthorizedAccess/UnauthorizedAccess";
 import Signup from "./components/Signup/Signup";
+import NotFound from "./components/404/404";
 
  //authorized router uncomment later;
 const PrivateRoute=({ children }) => {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/aboutus" element={<AboutUs/>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/unauthorizedAccess" element={<NoAccess/>}/>
+        <Route path="/*" element={<NotFound/>}/>
         {/* sign up */}
         {/* aboutus */}
         {/* etc etc */}
