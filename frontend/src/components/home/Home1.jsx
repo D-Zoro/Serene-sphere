@@ -27,10 +27,11 @@ const Home1 = () => {
               A peace full environment where you can anonymously chat, track your mood, and receive personalized support through quizzes and an AI assistant. Prioritize your emotional well-being discreetly and effectively with our compassionate community.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
-                
-                <a href="/aboutus" className="text-sm font-semibold leading-6 text-gray-900">
+              <div className="mt-10 flex items-center justify-center gap-x-6">
+                <a href="/aboutus" className="text-white rounded-2xl hover:bg-[#F472B6] hover:rounded-2xl transition duration-300 transform hover:scale-105">
                   About Us <span aria-hidden="true">→</span>
                 </a>
+              </div>
               </div>
             </div>
           </div>

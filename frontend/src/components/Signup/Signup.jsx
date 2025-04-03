@@ -319,6 +319,7 @@ export default function Signup() {
                                 </label>
                                 <label
                                     className="px-6 py-3 cursor-pointer rounded-lg bg-gradient-to-r  from-blue-900 to-pink-400 text-white hover:from-blue-800 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition shadow-lg"
+                                    onClick={handleSubmit}
                                 >
                                     <i className="fas fa-user-plus mr-2"></i>Save
                                 </label>

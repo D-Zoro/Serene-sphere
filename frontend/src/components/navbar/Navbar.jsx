@@ -77,7 +77,7 @@ const Navbar = () => {
           <div className="flex items-center lg:flex-1">
             <a href="/" className="flex items-center -m-1.5 p-1.5">
               <img className="h-8 w-auto" src={applogo} alt="Serene Sphere" />
-              <span className="ml-3 text-xl font-bold text-pink-400 hover:text-pink-400">
+              <span className="ml-3 text-xl font-bold text-pink-400 hover:text-pink-500">
                 Serene Sphere
               </span>
             </a>
