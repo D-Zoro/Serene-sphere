@@ -58,3 +58,35 @@ export const userLogin = async (req,res ) => {
         return res.status(500).json({ error: err.message });
     }
 };
+
+//get all users
+
+export const getUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+        return res.status(200).json(users);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+};
+
+
+//user detials 
+export const getUserDetails = async (req, res) => {
+    try {
+      // Find the user based on the username provided in the request parameters
+      const user = await User.findOne({ username: req.params.username });
+  
+      if (!user) {
+        // If user not found, send 404 status with error message
+        return res.status(404).json({ error: 'User not found' });
+      }
+  
+      // If user found, send user details in the response
+      res.json(user);
+    } catch (error) {
+      // If any error occurs, send 500 status with error message
+      console.error('Error fetching user details:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
