@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import SpotlightBox from '../reactcomp/SpotlightBox';
+import SpotlightBox from '../reactcomp/spotlight2';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Login = () => {

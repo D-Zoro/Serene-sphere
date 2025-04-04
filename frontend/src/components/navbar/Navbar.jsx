@@ -6,6 +6,7 @@ import Loader from "react-js-loader";
 import Spotlight from '../reactcomp/SpotlightBox';
 import Defaultpfp from '../../assets/Defaultpfp.jpg';
 
+
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

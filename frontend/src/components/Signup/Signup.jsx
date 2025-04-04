@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PhotoIcon } from '@heroicons/react/24/solid';
-import Spotlight from '../reactcomp/SpotlightBox';
+import Spotlight from '../reactcomp/spotlight2';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function Signup() {
