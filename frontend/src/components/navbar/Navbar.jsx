@@ -210,11 +210,11 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div
-            className={`fixed inset-0 z-50 bg-gray-800 text-white transform transition-transform duration-300 ${
-              mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+            className={`fixed inset-y-0 right-0 z-50 bg-gray-800 text-white w-64 transform transition-transform duration-300 ${
+              mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
           >
-            <div className="w-1/2 h-full px-6 py-4">
+            <div className="h-full px-6 py-4">
               {/* Close Button */}
               <button
                 onClick={toggleMobileMenu}
