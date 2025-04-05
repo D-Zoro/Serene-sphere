@@ -25,7 +25,7 @@ const Spotlight = ({ children }: SpotlightProps) => {
 
   return (
     <div
-      className="group relative w-auto h-auto rounded-xl border border-gray-400/20 bg-gradient-to-tr from-gray-800 to-gray-900 px-8 py-16 shadow-lg"
+      className="group relative w-auto h-auto rounded-xl border border-gray-400/20 bg-gradient-to-tr from-gray-800 to-gray-900 px-8 py-16 shadow-lg "
       onMouseMove={handleMouseMove}
     >
       <motion.div

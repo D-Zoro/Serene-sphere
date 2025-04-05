@@ -13,8 +13,9 @@ const NotFound = () => {
     };
 
     return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} className='h-screen w-screen overflow-hidden'>
         <Spotlight>
-            <section className="min-h-screen min-w-screen flex flex-col justify-center items-center">
+            <section className="min-h-screen min-w-screen flex flex-col justify-center">
                 <div className="relative py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                     {/* Decorative Icon */}
                     <div className="absolute top-10 left-10">
@@ -49,6 +50,7 @@ const NotFound = () => {
                 </div>
             </section>
         </Spotlight>
+        </div>
     );
 };
 

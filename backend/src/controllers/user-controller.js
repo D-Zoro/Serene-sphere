@@ -70,6 +70,27 @@ export const getUsers = async (req, res) => {
     }
 };
 
+// Delete User
+export const deleteUser = async (req, res) => {
+    try {
+      const { username } = req.params;
+  
+      // Find the user by username
+      const user = await User.findOneAndDelete({ username });
+      console.log(user);
+      if (!user) {
+        return res.status(404).json({ msg: 'User not found!' });
+      }
+  
+      // Delete all journals associated with the user
+      await Journal.deleteMany({ _id: { $in: user.journals } });
+  
+      return res.status(200).json({ msg: 'User and associated journals deleted successfully!' });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  };
+
 
 //user detials 
 export const getUserDetails = async (req, res) => {
@@ -90,3 +111,5 @@ export const getUserDetails = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
+
+  
