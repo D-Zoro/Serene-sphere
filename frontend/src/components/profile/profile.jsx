@@ -3,8 +3,9 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import Spotlight from "../reactcomp/SpotlightBox";
-import Loader from "react-js-loader"
+import Loader from "react-js-loader";
 import defaultProfilePicture from "../../assets/Defaultpfp.jpg";
+import bg from "./profile_bg.jpg";
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -29,15 +30,13 @@ const Profile = () => {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
         <div className="text-center">
-          <div className="loader">
           <Loader
-            type="spinner-default" // Type of loader (e.g., spinner, bubble, etc.)
-            bgColor={"cyan"}    // Background color of the loader
-            color={"cyan"}      // Color of the loader
-            size={100}             // Size of the loader (in pixels)
-            />
-          </div>
-          <p className="text-pink-500 mt-4">Loading user details...</p>
+            type="spinner-default"
+            bgColor={"#ff80b5"}
+            color={"#ff80b5"}
+            size={100}
+          />
+          <p className="text-pink-400 mt-4">Loading user details...</p>
         </div>
       </div>
     );
@@ -45,15 +44,14 @@ const Profile = () => {
 
   return (
     <>
-    <Spotlight>
-      <Navbar />
-      <main className="profile-page bg-gradient-to-b from-gray-800 to-gray-900 min-h-screen">
+      <Spotlight>
+        <Navbar />
+        <main className="profile-page bg-gradient-to-b from-gray-800 to-gray-900 min-h-screen">
           <section className="relative block h-[400px]">
             <div
               className="absolute top-0 w-full h-full bg-center bg-cover"
               style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80')",
+                backgroundImage: `url(${bg})`,
               }}
             >
               <span className="w-full h-full absolute opacity-50 bg-black"></span>
@@ -71,16 +69,16 @@ const Profile = () => {
                 x="0"
                 y="0"
               >
-                <polygon
+                {/* <polygon
                   className="text-gray-800 fill-current"
                   points="2560 0 2560 100 0 100"
-                ></polygon>
+                ></polygon> */}
               </svg>
             </div>
           </section>
           <section className="relative py-16 bg-gradient-to-b from-gray-800 to-gray-900">
             <div className="container mx-auto px-4">
-              <div className="relative flex flex-col min-w-0 break-words bg-gradient-to-tr from-gray-800 to-gray-900 w-full mb-6 shadow-xl rounded-lg -mt-64">
+              <div className="relative flex flex-col min-w-0 break-words bg-gradient-to-tr from-gray-800 to-gray-500 w-full mb-6 shadow-xl rounded-lg -mt-64">
                 <div className="px-6">
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
@@ -90,10 +88,9 @@ const Profile = () => {
                           src={
                             userDetails.profilePicture
                               ? `${import.meta.env.VITE_API_BASE_URL}/${userDetails.profilePicture}`
-                              : 
-                            defaultProfilePicture
+                              : defaultProfilePicture
                           }
-                          className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-24 max-w-[180px]"
+                          className="shadow-xl rounded-full align-middle border-4 border-cyan-500 absolute -m-16 -ml-20 lg:-ml-24 max-w-[180px]"
                         />
                       </div>
                     </div>
@@ -110,7 +107,7 @@ const Profile = () => {
                     <div className="w-full lg:w-4/12 px-4 lg:order-1">
                       <div className="flex justify-center py-4 lg:pt-4 pt-8">
                         <div className="mr-4 p-3 text-center">
-                          <span className="text-xl font-bold block uppercase tracking-wide text-gray-300">
+                          <span className="text-xl font-bold block uppercase tracking-wide text-pink-400">
                             {userDetails.journals.length}
                           </span>
                           <span className="text-sm text-gray-400">
@@ -121,19 +118,19 @@ const Profile = () => {
                     </div>
                   </div>
                   <div className="text-center mt-12">
-                    <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-100">
+                    <h3 className="text-4xl font-bold leading-normal mb-2 text-pink-400">
                       {userDetails.name}
                     </h3>
                     <div className="mb-2 text-gray-400 mt-10">
-                      <i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i>
+                      <i className="fas fa-briefcase mr-2 text-lg text-pink-400"></i>
                       Age: {userDetails.age}
                     </div>
                     <div className="mb-2 text-gray-400">
-                      <i className="fas fa-university mr-2 text-lg text-gray-500"></i>
+                      <i className="fas fa-university mr-2 text-lg text-pink-400"></i>
                       Email: {userDetails.email}
                     </div>
                   </div>
-                  <div className="mt-10 py-10 border-t border-gray-700 text-center">
+                  <div className="mt-10 py-10 border-t border-pink-300 text-center">
                     <div className="flex flex-wrap justify-center">
                       <div className="w-full lg:w-9/12 px-4">
                         <p className="mb-4 text-lg leading-relaxed text-gray-300">
@@ -156,7 +153,7 @@ const Profile = () => {
               </div>
             </div>
           </section>
-         </main>
+        </main>
       </Spotlight>
     </>
   );
