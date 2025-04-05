@@ -42,7 +42,7 @@ app.use(passport.session());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use('/uploads', express.static(path.join(__dirname,'uploads')));
+app.use('/uploads', express.static(path.join(__dirname,'..','uploads')));
 //uploads1 ka idar dalo 
 
 
