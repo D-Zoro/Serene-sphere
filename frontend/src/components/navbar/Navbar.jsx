@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import applogo from '../../assets/applogo.png'
+import axios from 'axios'; // Add axios import
 
 import Loader from "react-js-loader";
 import Spotlight from '../reactcomp/SpotlightBox';
@@ -12,6 +13,7 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userDetails, setUserDetails] = useState(null); // Add state for user details
   const navigate = useNavigate();
   const user = localStorage.getItem('tokenUser');
 
@@ -20,8 +22,24 @@ const Navbar = () => {
     
     if (token) {
       setIsLoggedIn(true);
+      
+      // Fetch user details if logged in
+      const fetchUserDetails = async () => {
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_API_BASE_URL}/${user}/getuserdetails`
+          );
+          setUserDetails(response.data);
+        } catch (error) {
+          console.error("Error fetching user details:", error);
+        }
+      };
+      
+      if (user) {
+        fetchUserDetails();
+      }
     }
-  }, []);
+  }, [user]);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -70,6 +88,15 @@ const Navbar = () => {
 
   const Linkiclass="text-lg font-semibold leading-6 text-cyan-300 hover:text-pink-400 transition duration-200 transform hover:scale-105 hover:tracking-wide font-size-";
   const Linkiclass1="text-sm font-semibold leading-6 text-cyan-300 hover:text-pink-400 transition duration-200 transform hover:scale-105 hover:tracking-wide font-size-";
+
+  // Get profile picture source
+  const getProfilePicture = () => {
+    if (userDetails && userDetails.profilePicture) {
+      return `${import.meta.env.VITE_API_BASE_URL}/${userDetails.profilePicture}`;
+    }
+    return Defaultpfp;
+  };
+
   return (
     <div className="bg-gradient-to-b from-blue-900 to-gray-800 w-full z-50 shadow-lg">
       <header className="absolute inset-x-0 top-0 z-50">
@@ -161,7 +188,7 @@ const Navbar = () => {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="h-8 w-8 rounded-full"
-                    src={Defaultpfp}
+                    src={getProfilePicture()}
                     alt="Profile"
                   />
                 </button>
@@ -307,7 +334,7 @@ const Navbar = () => {
                   <div className="flex items-center gap-3">
                     <img
                       className="h-10 w-10 rounded-full"
-                      src={Defaultpfp}
+                      src={getProfilePicture()}
                       alt="Profile"
                     />
                     <span className="text-sm font-semibold text-gray-300">
