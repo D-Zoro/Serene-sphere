@@ -11,6 +11,7 @@ const NoAccess = () => {
   };
 
   return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} className='h-screen w-screen overflow-hidden'>
     <Spotlight>
     <section className=" min-h-screen min-w-screen flex flex-col justify-center items-center">
       
@@ -52,6 +53,7 @@ const NoAccess = () => {
       </div>
     </section>
     </Spotlight>
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import applogo from '../../assets/applogo.png'
+import axios from 'axios'; // Add axios import
 
 import Loader from "react-js-loader";
 import Spotlight from '../reactcomp/SpotlightBox';
@@ -12,6 +13,7 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userDetails, setUserDetails] = useState(null); // Add state for user details
   const navigate = useNavigate();
   const user = localStorage.getItem('tokenUser');
 
@@ -20,8 +22,24 @@ const Navbar = () => {
     
     if (token) {
       setIsLoggedIn(true);
+      
+      // Fetch user details if logged in
+      const fetchUserDetails = async () => {
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_API_BASE_URL}/${user}/getuserdetails`
+          );
+          setUserDetails(response.data);
+        } catch (error) {
+          console.error("Error fetching user details:", error);
+        }
+      };
+      
+      if (user) {
+        fetchUserDetails();
+      }
     }
-  }, []);
+  }, [user]);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -68,6 +86,17 @@ const Navbar = () => {
     setShowDeleteModal(false);
   };
 
+  const Linkiclass="text-lg font-semibold leading-6 text-cyan-300 hover:text-pink-400 transition duration-200 transform hover:scale-105 hover:tracking-wide font-size-";
+  const Linkiclass1="text-sm font-semibold leading-6 text-cyan-300 hover:text-pink-400 transition duration-200 transform hover:scale-105 hover:tracking-wide font-size-";
+
+  // Get profile picture source
+  const getProfilePicture = () => {
+    if (userDetails && userDetails.profilePicture) {
+      return `${import.meta.env.VITE_API_BASE_URL}/${userDetails.profilePicture}`;
+    }
+    return Defaultpfp;
+  };
+
   return (
     <div className="bg-gradient-to-b from-blue-900 to-gray-800 w-full z-50 shadow-lg">
       <header className="absolute inset-x-0 top-0 z-50">
@@ -106,34 +135,40 @@ const Navbar = () => {
               </svg>
             </button>
           </div>
+          {/* Desktop Navbar Links */}
           <div className="hidden lg:flex lg:gap-x-12">
             <a
               href={`/${user}/mood`}
-              className="text-sm font-semibold leading-6 text-gray-300 hover:text-pink-400 transition duration-200"
+              className={Linkiclass}
+              style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               Mood Tracker
             </a>
             <a
               href={`/${user}/therapist`}
-              className="text-sm font-semibold leading-6 text-gray-300 hover:text-pink-400 transition duration-200"
+              className={Linkiclass}
+              style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               AI Therapist
             </a>
             <a
               href={`/${user}/quiz`}
-              className="text-sm font-semibold leading-6 text-gray-300 hover:text-pink-400 transition duration-200"
+              className={Linkiclass}
+              style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               Quiz
             </a>
             <a
               href={`/${user}/anonymoussharing`}
-              className="text-sm font-semibold leading-6 text-gray-300 hover:text-pink-400 transition duration-200"
+              className={Linkiclass}
+              style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               Anonymous Sharing
             </a>
             <a
               href="/aboutus"
-              className="text-sm font-semibold leading-6 text-gray-300 hover:text-pink-400 transition duration-200"
+              className={Linkiclass}
+              style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               About Us
             </a>
@@ -143,7 +178,7 @@ const Navbar = () => {
               <div className="relative ml-3">
                 <button
                   type="button"
-                  className="relative flex rounded-full w-8 h-8 bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 hover:ring-gray-500"
+                  className="relative flex rounded-full w-8 h-8 bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 hover:ring-gray-500 "
                   id="user-menu-button"
                   aria-expanded={dropdownOpen}
                   aria-haspopup="true"
@@ -153,13 +188,13 @@ const Navbar = () => {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="h-8 w-8 rounded-full"
-                    src={Defaultpfp}
+                    src={getProfilePicture()}
                     alt="Profile"
                   />
                 </button>
                 {dropdownOpen && (
                   <div
-                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 text-white transform transition-transform duration-300 "
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="user-menu-button"
@@ -167,7 +202,7 @@ const Navbar = () => {
                   >
                     <a
                       href={`/${user}/profile`}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block text-sm font-semibold leading-6 text-cyan-200 hover:text-pink-500 transition duration-200 px-3 py-2"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-0"
@@ -177,7 +212,7 @@ const Navbar = () => {
                     <a
                       onClick={(e) => handleLogout(e)}
                       href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block text-sm font-semibold leading-6 text-cyan-200 hover:text-red-500 transition duration-200 px-3 py-2"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-2"
@@ -187,7 +222,7 @@ const Navbar = () => {
                     <a
                       onClick={handleDelete}
                       href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block text-sm font-semibold text-red-500 leading-6 text- hover:text-red-700 transition duration-200 px-3 py-2"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-2"
@@ -200,7 +235,7 @@ const Navbar = () => {
             ) : (
               <a
                 href="/login"
-                className="text-sm font-semibold leading-6 text-gray-300 hover:text-white transition duration-200"
+                className="text-sm font-semibold leading-6 text-pink-400 hover:text-pink-500 transition duration-200"
               >
                 Login <span aria-hidden="true">→</span>
               </a>
@@ -216,9 +251,10 @@ const Navbar = () => {
           >
             <div className="h-full px-6 py-4">
               {/* Close Button */}
+              <div className='flex justify-end'>
               <button
                 onClick={toggleMobileMenu}
-                className="text-gray-300 hover:text-white focus:outline-none mb-4"
+                className="text-gray-300 hover:text-red-500 focus:outline-none mb-4 "
               >
                 <svg
                   className="h-6 w-6"
@@ -235,6 +271,7 @@ const Navbar = () => {
                   />
                 </svg>
               </button>
+              </div>
 
               {/* App Logo */}
               <a href="/" className="flex items-center mb-6">
@@ -244,50 +281,60 @@ const Navbar = () => {
                 </span>
               </a>
 
-              {/* Navigation Links */}
+              {/* Mobile Menu Links */}
               <div className="space-y-4">
                 <a
                   href={`/${user}/mood`}
-                  className="block text-sm font-semibold leading-6 text-gray-300 hover:text-pink-400 transition duration-200"
+                  className={Linkiclass1}
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
                 >
                   Mood Tracker
                 </a>
+                <br />
                 <a
                   href={`/${user}/therapist`}
-                  className="block text-sm font-semibold leading-6 text-gray-300 hover:text-pink-400 transition duration-200"
+                  className={Linkiclass1}
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
                 >
                   AI Therapist
                 </a>
+                <br />
                 <a
                   href={`/${user}/quiz`}
-                  className="block text-sm font-semibold leading-6 text-gray-300 hover:text-pink-400 transition duration-200"
+                  className={Linkiclass1}
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
                 >
                   Quiz
                 </a>
+                <br />
                 <a
                   href={`/${user}/anonymoussharing`}
-                  className="block text-sm font-semibold leading-6 text-gray-300 hover:text-pink-400 transition duration-200"
+                  className={Linkiclass1}
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
                 >
                   Anonymous Sharing
                 </a>
+                <br />
                 <a
                   href="/aboutus"
-                  className="block text-sm font-semibold leading-6 text-gray-300 hover:text-pink-400 transition duration-200"
+                  className={Linkiclass1}
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
                 >
                   About Us
                 </a>
+                <br />
               </div>
 
               {/* Divider Line */}
-              <hr className="my-6 border-gray-600" />
+              <hr className="my-6 border-teal-400" />
 
               {/* Profile Section */}
-              {isLoggedIn && (
+              {isLoggedIn ?(
                 <div>
                   <div className="flex items-center gap-3">
                     <img
                       className="h-10 w-10 rounded-full"
-                      src={Defaultpfp}
+                      src={getProfilePicture()}
                       alt="Profile"
                     />
                     <span className="text-sm font-semibold text-gray-300">
@@ -317,6 +364,13 @@ const Navbar = () => {
                     </a>
                   </div>
                 </div>
+              ):(
+                <a
+                  href="/login"
+                  className="text-sm font-semibold leading-6 text-gray-300 hover:text-white transition duration-200"
+                >
+                  Login <span aria-hidden="true">→</span>
+                </a>
               )}
             </div>
           </div>

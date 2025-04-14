@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 @import "tailwindcss";
+
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -24,18 +26,18 @@
   color: #535bf2;
 } */
 /* just in case for overflow */
+
 html, body {
   overflow-x: hidden;
 }
 
-
-body {
-  margin: 0;
+ body {
+  /* margin: 0;
   display: block;
-  place-items: center;
+  place-items: center; */
   min-width: 320px;
   min-height: 100vh;
-}
+} 
 
 h1 {
   font-size: 3.2em;
@@ -53,23 +55,23 @@ h1 {
   cursor: pointer;
   transition: border-color 0.25s;
 } */
-/* button:hover {
+button:hover {
   border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-} */
+}
 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
-  /* a:hover {
+  a:hover {
     color: #747bff;
-  } */
-  /* button {
+  }
+  button {
     background-color: #f9f9f9;
-  } */
+  }
 }
