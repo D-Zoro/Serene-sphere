@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Home2 from "./Home2";
+import Home3 from "./Home3";
 
 // Import icons (you'll need to install react-icons: npm install react-icons)
 import { FaBrain, FaUserFriends, FaChartLine, FaQuestionCircle } from 'react-icons/fa';
@@ -15,28 +17,7 @@ const Home1 = () => {
     }
   }, []);
 
-  const features = [
-    {
-      icon: <FaBrain className="text-4xl text-pink-400 mb-3" />,
-      title: "AI Therapist",
-      description: "Get personalized support and guidance from our AI-powered therapist."
-    },
-    {
-      icon: <FaChartLine className="text-4xl text-cyan-400 mb-3" />,
-      title: "Mood Tracker",
-      description: "Track your emotional well-being and identify patterns over time."
-    },
-    {
-      icon: <FaUserFriends className="text-4xl text-purple-400 mb-3" />,
-      title: "Anonymous Sharing",
-      description: "Share your thoughts and experiences in a safe, anonymous environment."
-    },
-    {
-      icon: <FaQuestionCircle className="text-4xl text-blue-400 mb-3" />,
-      title: "Self-Assessment Quiz",
-      description: "Discover insights about yourself through our thoughtfully designed quizzes."
-    }
-  ];
+
   
   const quotes = [
     { text: "Mental health is not a destination, but a process. It's about how you drive, not where you're going.", author: "Noam Shpancer" },
@@ -45,7 +26,7 @@ const Home1 = () => {
   ];
   
   return (
-    <div className="bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen">
+    <div className=" min-h-screen">
       {/* Hero Section */}
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
@@ -98,41 +79,12 @@ const Home1 = () => {
         </div>
       </div>
       
-      {/* Features Section */}
-      <section className="py-16 px-6 max-w-7xl mx-auto">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-        >
-          <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-4">
-            Discover Our Features
-          </h2>
-          <p className="text-xl text-gray-300">Tools designed to support your mental well-being journey</p>
-        </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <motion.div 
-              key={index}
-              className="bg-gradient-to-b from-gray-800 to-gray-900 p-6 rounded-xl shadow-lg hover:shadow-pink-500/10 transition-all duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-            >
-              <div className="text-center">
-                {feature.icon}
-                <h3 className="text-xl font-semibold text-pink-300 mb-3">{feature.title}</h3>
-                <p className="text-gray-300">{feature.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      <Home3/>
+      <Home2/>
       
       {/* Quote Carousel Section */}
-      <section className="py-16 bg-gradient-to-b from-gray-800 to-gray-900">
+      
+      <section className="py-16 ">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div 
             className="text-center mb-12"
@@ -163,38 +115,7 @@ const Home1 = () => {
         </div>
       </section>
       
-      {/* CTA Section - Only show if not logged in */}
-      {!isLoggedIn && (
-        <section className="py-16 px-6">
-          <motion.div 
-            className="max-w-3xl mx-auto text-center bg-gradient-to-r from-gray-800 to-gray-900 p-10 rounded-2xl shadow-2xl border border-pink-500/20"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
-          >
-            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-4">
-              Begin Your Journey Today
-            </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              Join our community and take the first step toward a more peaceful mind and emotional well-being.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a 
-                href="/register" 
-                className="w-full sm:w-auto rounded-md bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:from-pink-600 hover:to-purple-700 transition-all duration-300"
-              >
-                Sign Up Free
-              </a>
-              <a 
-                href="/login" 
-                className="w-full sm:w-auto rounded-md border border-cyan-500 px-6 py-3 text-lg font-semibold text-cyan-400 shadow-sm hover:bg-cyan-950 transition-all duration-300"
-              >
-                Login
-              </a>
-            </div>
-          </motion.div>
-        </section>
-      )}
+      
     </div>
   );
 };
