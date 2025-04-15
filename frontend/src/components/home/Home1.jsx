@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer'; // Import useInView
 import Home2 from "./Home2";
 import Home3 from "./Home3";
 
@@ -17,16 +18,18 @@ const Home1 = () => {
     }
   }, []);
 
-
-  
   const quotes = [
     { text: "Mental health is not a destination, but a process. It's about how you drive, not where you're going.", author: "Noam Shpancer" },
     { text: "Self-care is how you take your power back.", author: "Lalah Delia" },
     { text: "You don't have to be positive all the time. It's perfectly okay to feel sad, angry, annoyed, frustrated, scared and anxious.", author: "Lori Deschene" }
   ];
-  
+
+  // Use useInView for animations
+  const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true });
+  const { ref: quotesRef, inView: quotesInView } = useInView({ triggerOnce: true });
+
   return (
-    <div className=" min-h-screen">
+    <div className="min-h-screen">
       {/* Hero Section */}
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
@@ -35,12 +38,12 @@ const Home1 = () => {
           }} />
         </div>
         
-        <div className="mx-auto max-w-4xl py-24 sm:py-32 lg:py-40">
+        <div ref={heroRef} className="mx-auto max-w-4xl py-24 sm:py-32 lg:py-40">
           <motion.div 
             className="text-center"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}} // Animate only when in view
+            transition={{ duration: 1.5 }} // Slower animation
           >
             <h1 className="text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600 sm:text-7xl mb-6">
               Welcome to Serene Sphere
@@ -84,13 +87,13 @@ const Home1 = () => {
       
       {/* Quote Carousel Section */}
       
-      <section className="py-16 ">
+      <section ref={quotesRef} className="py-16 ">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div 
             className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            animate={quotesInView ? { opacity: 1, y: 0 } : {}} // Animate only when in view
+            transition={{ duration: 1.5 }} // Slower animation
           >
             <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 mb-4">
               Words of Wisdom
@@ -104,8 +107,8 @@ const Home1 = () => {
                 key={index} 
                 className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl shadow-lg border border-gray-700"
                 initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.7 + index * 0.1, duration: 0.5 }}
+                animate={quotesInView ? { opacity: 1, scale: 1 } : {}} // Animate only when in view
+                transition={{ delay: 0.2 * index, duration: 1 }} // Slower animation
               >
                 <p className="italic text-gray-300 mb-4">"{quote.text}"</p>
                 <p className="text-right text-pink-400">— {quote.author}</p>
