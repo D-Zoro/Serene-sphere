@@ -22,7 +22,7 @@ const Login = () => {
       localStorage.setItem('tokenUser', response.data.user.username);
       navigate(`/`);
     } catch (_err) {
-      setError('Invalid username or password');
+      setError(_err.message);
     }
   };
 
