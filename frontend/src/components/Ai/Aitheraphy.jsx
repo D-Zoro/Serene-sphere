@@ -4,6 +4,7 @@ import Loader from 'react-js-loader';
 import applogo from '../../assets/applogo.png';
 import Navbar from '../navbar/Navbar';
 
+
 const Aitheraphy = () => {
   const [messages, setMessages] = useState([
     {
@@ -29,7 +30,7 @@ const Aitheraphy = () => {
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_AI_API_KEY}`,
           'Content-Type': 'application/json',
-          'HTTP-Referer': 'http://localhost:5173', // replace with your actual domain if deploying
+          'HTTP-Referer': `${import.meta.env.VITE_HTTP_REF}`, // replace with your actual domain if deploying
           'X-Title': 'Serai - AI Therapist',
         },
         body: JSON.stringify({
