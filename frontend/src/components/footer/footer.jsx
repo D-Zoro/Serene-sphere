@@ -42,16 +42,16 @@ const Footer = () => {
               A peaceful environment for mental wellbeing, offering anonymous support and resources for your emotional health journey.
             </p>
             <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-pink-400 hover:text-pink-300 transition-colors">
+              <a href="https://github.com/D-Zoro/Serene-sphere" className="text-pink-400 hover:text-pink-300 transition-colors">
                 <FaGithub size={20} />
               </a>
-              <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors">
+              <a href="https://www.linkedin.com/in/neonpulse/" className="text-blue-400 hover:text-blue-300 transition-colors">
                 <FaLinkedin size={20} />
               </a>
-              <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
+              <a href="https://www.instagram.com/nish_ain.t" className="text-purple-400 hover:text-purple-300 transition-colors">
                 <FaInstagram size={20} />
               </a>
-              <a href="mailto:contact@serenesphere.com" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+              <a href="mailto:neonpulse142k@gmail.com" className="text-cyan-400 hover:text-cyan-300 transition-colors">
                 <FaEnvelope size={20} />
               </a>
             </div>
@@ -125,13 +125,13 @@ const Footer = () => {
           >
             <h2 className="mb-6 text-lg font-bold text-pink-400">Contact Us</h2>
             <p className="text-gray-300 mb-3">
-              <strong className="text-cyan-400">Email:</strong> contact@serenesphere.com
+              <strong className="text-cyan-400">Email:</strong> neonpulse142k@gmail.com
             </p>
             <p className="text-gray-300 mb-3">
-              <strong className="text-cyan-400">Support:</strong> help@serenesphere.com
+              <strong className="text-cyan-400">Support:</strong> +91 420-420-420
             </p>
             <p className="text-gray-300">
-              <strong className="text-cyan-400">Address:</strong> 123 Mental Health Ave, Digital World
+              <strong className="text-cyan-400">Address:</strong> Dayananda Sagar College of Engneering, kumarswamy layout, Bangalore, Karnataka, India
             </p>
           </motion.div>
         </div>
