@@ -68,7 +68,7 @@ const Navbar = () => {
   const confirmDelete = async () => {
     try {
       // Call the backend route to delete the user
-      await fetch(`${import.meta.env.VITE_API_BASE_URL}/delete-user/${user}`, {
+      await axios.get(`${import.meta.env.VITE_API_BASE_URL}/delete-user/${user}`, {
         method: 'DELETE',
       });
       // Perform logout after deletion
