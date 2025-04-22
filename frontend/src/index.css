@@ -16,6 +16,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+*::selection {
+  background-color:  #0dd9d9;
+  color: black;
+}
+
 
 /* a {
   font-weight: 500;
