@@ -4,12 +4,37 @@ import Navbar from "../navbar/Navbar";
 // Import social media icons
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import neo from "./neo.jpeg";
+import jeo from "./jeo.jpeg"
 import leo from "./leo.jpeg"
 // Team member data - replace with actual info and image paths
 const teamMembers = [
   {
     id: 1,
-    name: "NeonPulse",
+    name: "KVS Shri Krishna",
+    position: "UI/UX Devloper",
+    image: leo,
+    bio: "Creative designer focused on building intuitive user experiences",
+    social: {
+      github: "https://github.com/*",
+      linkedin: "https://linkedin.com/in/*",
+      instagram: "https://instagram.com/*",
+    }
+  },
+  {
+    id: 2,
+    name: "Nisarga Reddy",
+    position: "Frontend Devloper",
+    image: leo,
+    bio: "Spealized in Frontend Devlopment",
+    social: {
+      github: "https://github.com/*",
+      linkedin: "https://linkedin.com/in/*",
+      instagram: "https://instagram.com/*",
+    }
+  },
+  {
+    id: 3,
+    name: "Nishanth P. Ouseph",
     position: "Full Stack Developer",
     image: neo, // Replace with actual images
     bio: "Passionate developer with expertise in React and Node.js",
@@ -19,40 +44,17 @@ const teamMembers = [
       instagram: "https://instagram.com/nish_ain.t",
     }
   },
-  {
-    id: 2,
-    name: "Team Member 2",
-    position: "UI/UX Designer",
-    image: leo,
-    bio: "Creative designer focused on building intuitive user experiences",
-    social: {
-      github: "https://github.com/username2",
-      linkedin: "https://linkedin.com/in/username2",
-      instagram: "https://instagram.com/username2",
-    }
-  },
-  {
-    id: 3,
-    name: "Team Member 3",
-    position: "Backend Developer",
-    image: leo,
-    bio: "Database expert specialized in building scalable services",
-    social: {
-      github: "https://github.com/username3",
-      linkedin: "https://linkedin.com/in/username3",
-      instagram: "https://instagram.com/username3",
-    }
-  },
+ 
   {
     id: 4,
-    name: "Team Member 4",
-    position: "Project Manager",
-    image: leo,
-    bio: "Experienced in leading teams and delivering successful projects",
+    name: "Prachi Choudhary",
+    position: "Researcher",
+    image: jeo,
+    bio: "Specialized in Researching and collecting Information",
     social: {
-      github: "https://github.com/username4",
-      linkedin: "https://linkedin.com/in/username4",
-      instagram: "https://instagram.com/username3",
+      github: "https://github.com/*",
+      linkedin: "https://linkedin.com/in/*",
+      instagram: "https://instagram.com/*",
     }
   }
 ];
