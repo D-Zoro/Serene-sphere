@@ -7,6 +7,7 @@ import neo from "./neo.jpeg";
 import jeo from "./jeo.jpeg"
 import leo from "./leo.jpeg"
 import ceo from "./ceo.jpeg"
+import zeo from "./zeo.jpeg"
 // Team member data - replace with actual info and image paths
 const teamMembers = [
   {
@@ -25,7 +26,7 @@ const teamMembers = [
     id: 2,
     name: "Nisarga Reddy",
     position: "Frontend Devloper",
-    image: leo,
+    image: zeo,
     bio: "Spealized in Frontend Devlopment",
     social: {
       github: "https://github.com/*",
