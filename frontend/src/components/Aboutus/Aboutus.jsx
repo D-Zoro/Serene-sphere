@@ -12,7 +12,7 @@ import zeo from "./zeo.jpeg"
 const teamMembers = [
   {
     id: 1,
-    name: "KVS Shri Krishna",
+    name: "KVS Sri Krishna",
     position: "UI/UX Devloper",
     image: ceo,
     bio: "Creative designer focused on building intuitive user experiences",
