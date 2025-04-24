@@ -3,7 +3,42 @@ import { motion } from 'framer-motion';
 import Loader from 'react-js-loader';
 import applogo from '../../assets/applogo.png';
 import Navbar from '../navbar/Navbar';
+// Remove the problematic import
+// import AnimatedDots from 'react-animated-dots';
 
+// Custom typing indicator component
+const TypingIndicator = ({ color = "#22d3ee" }) => { // Changed to cyan color
+  return (
+    <div className="flex items-center">
+      <span className="text-cyan-300 mr-2 font-medium">Serai</span> {/* Changed to cyan */}
+      <div className="flex space-x-1">
+        {[0, 1, 2].map((dot) => (
+          <motion.div
+            key={dot}
+            className="h-2 w-2 rounded-full"
+            style={{ backgroundColor: color }}
+            animate={{
+              y: ["0%", "-40%", "0%"]
+            }}
+            transition={{
+              duration: 0.6,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: dot * 0.1
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Function to process message content and remove leading asterisks
+const processMessageContent = (content) => {
+  // Remove leading asterisks from each line
+  return content.replace(/^\s*\*\s*/gm, '');
+};
 
 const Aitheraphy = () => {
   const [messages, setMessages] = useState([
@@ -14,59 +49,96 @@ const Aitheraphy = () => {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [typing, setTyping] = useState(false);
   const chatBoxRef = useRef(null); // Ref for auto-scrolling
+  const messageQueueRef = useRef([]);
+
+  // Function to render text with line breaks
+  const renderTextWithLineBreaks = (text) => {
+    // Process the text to remove asterisks first
+    const processedText = processMessageContent(text);
+    return processedText.split('\n').map((line, i) => (
+      <React.Fragment key={i}>
+        {line}
+        {i < processedText.split('\n').length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
+
+  // Function to process the message queue with delay
+  const processMessageQueue = () => {
+    try {
+      if (messageQueueRef.current.length === 0) {
+        setTyping(false);
+        return;
+      }
+      
+      setTyping(true);
+      const nextMessage = messageQueueRef.current.shift();
+      
+      setMessages(prev => [...prev, { role: 'assistant', content: nextMessage }]);
+      
+      // Add delay between messages
+      setTimeout(() => {
+        processMessageQueue();
+      }, 800 + Math.random() * 500);
+    } catch (error) {
+      setTyping(false);
+    }
+  };
 
   const sendMessage = async () => {
-    if (!input.trim()) return;
-
-    const newMessages = [...messages, { role: 'user', content: input }];
-    setMessages(newMessages);
-    setInput('');
-    setLoading(true);
+    if (!input.trim() || typing || loading) return;
 
     try {
+      // Store user message first (more robust approach)
+      const userMessage = { role: 'user', content: input };
+      setMessages(prevMessages => [...prevMessages, userMessage]);
+      setInput('');
+      setLoading(true);
+      
       const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_AI_API_KEY}`,
           'Content-Type': 'application/json',
-          'HTTP-Referer': `${import.meta.env.VITE_HTTP_REF}`, // replace with your actual domain if deploying
+          'HTTP-Referer': `${import.meta.env.VITE_HTTP_REF}`,
           'X-Title': 'Serai - AI Therapist',
         },
         body: JSON.stringify({
-            model: "anthropic/claude-3-haiku",
+          model: "anthropic/claude-3-haiku",
           messages: [
             {
               role: 'system',
               content:
-                "You are Serai , an ai therapist that helps users with their mental health. keep the chats really short ",
+                "You are Serai, an ai therapist that helps users with their mental health. Keep the chats really short. Format your responses if reply is too long make it shorter brief points like 2 points not more than that maybe 3 in worst casebut not always, keep it like chat is most cases like very shot maybe try to talk and ask instead of just answering at once like talk with 5-10 words. Use \n to separate new lines",
             },
-            ...newMessages,
+            ...messages,
+            userMessage,
           ],
         }),
       });
 
       const data = await res.json();
-      console.log("🧠 OpenRouter Response:", data);
-      // Safety check
-if (data.choices && data.choices.length > 0 && data.choices[0].message?.content) {
-    const aiReply = data.choices[0].message.content;
-    setMessages([...newMessages, { role: 'assistant', content: aiReply }]);
-  } else {
-    console.warn("⚠️ Unexpected response:", data);
-    setMessages([...newMessages, { role: 'assistant', content: 'The AI had nothing to say 🥲' }]);
-  }
-
       
+      // Safety check
+      if (data.choices && data.choices.length > 0 && data.choices[0].message?.content) {
+        const aiReply = data.choices[0].message.content;
+        
+        // Split the response by newlines and add to message queue
+        const messageParts = aiReply.split('\n').filter(part => part.trim() !== '');
+        messageQueueRef.current = messageParts;
+        
+        setLoading(false);
+        processMessageQueue();
+      } else {
+        setMessages(prevMessages => [...prevMessages, { role: 'assistant', content: 'The AI had nothing to say 🥲' }]);
+        setLoading(false);
+      }
     } catch (err) {
-      console.error(err);
-      setMessages([
-        ...newMessages,
-        { role: 'assistant', content: 'Something went wrong. Please try again later.' },
-      ]);
+      setMessages(prevMessages => [...prevMessages, { role: 'assistant', content: 'Something went wrong. Please try again later.' }]);
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   // Auto-scroll to the bottom of the chat box
@@ -137,21 +209,21 @@ if (data.choices && data.choices.length > 0 && data.choices[0].message?.content)
                 transition={{ duration: 0.3 }}
                 className={`p-4 rounded-2xl text-sm max-w-[80%] ${
                   msg.role === 'user'
-                    ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white self-end shadow-lg'
-                    : 'bg-gradient-to-r from-gray-700 to-gray-600 text-gray-100 self-start shadow-md'
+                    ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white self-end shadow-lg font-medium'
+                    : 'bg-gradient-to-r from-emerald-600 to-cyan-600 text-cyan-50 self-start shadow-md whitespace-pre-line font-medium tracking-wide'
                 }`}
               >
-                {msg.content}
+                {renderTextWithLineBreaks(msg.content)}
               </motion.div>
             ))}
-            {loading && (
+            {/* Replace AnimatedDots with our custom component */}
+            {(loading || typing) && (
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="flex items-center gap-3 text-gray-300 self-start bg-gray-700 p-3 rounded-xl"
+                className="flex items-center gap-2 text-cyan-100 self-start bg-gradient-to-r from-emerald-800 to-cyan-900 bg-opacity-80 py-3 px-4 rounded-xl border border-cyan-800"
               >
-                <Loader type="spinner-default" bgColor="#ff80b5" color="#ff80b5" size={24} />
-                <span>Thinking...</span>
+                <TypingIndicator />
               </motion.div>
             )}
           </div>
@@ -169,14 +241,21 @@ if (data.choices && data.choices.length > 0 && data.choices[0].message?.content)
                 placeholder="Tell me what's on your mind..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-                className="flex-1 px-5 py-4 rounded-xl bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:bg-gray-600 transition-all duration-300"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !typing && !loading) {
+                    e.preventDefault();
+                    sendMessage();
+                  }
+                }}
+                disabled={typing || loading}
+                className={`flex-1 px-5 py-4 rounded-xl bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:bg-gray-600 transition-all duration-300 ${(typing || loading) ? 'opacity-70' : ''}`}
               />
               <motion.button
                 onClick={sendMessage}
-                className="px-6 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-pink-500/25"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
+                disabled={typing || loading}
+                className={`px-6 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-pink-500/25 ${typing ? 'opacity-70 cursor-not-allowed' : ''}`}
+                whileHover={!typing ? { scale: 1.05 } : {}}
+                whileTap={!typing ? { scale: 0.98 } : {}}
               >
                 Send
               </motion.button>
