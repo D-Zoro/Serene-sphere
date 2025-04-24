@@ -6,13 +6,14 @@ import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import neo from "./neo.jpeg";
 import jeo from "./jeo.jpeg"
 import leo from "./leo.jpeg"
+import ceo from "./ceo.jpeg"
 // Team member data - replace with actual info and image paths
 const teamMembers = [
   {
     id: 1,
     name: "KVS Shri Krishna",
     position: "UI/UX Devloper",
-    image: leo,
+    image: ceo,
     bio: "Creative designer focused on building intuitive user experiences",
     social: {
       github: "https://github.com/*",
