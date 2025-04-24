@@ -68,7 +68,7 @@ const Footer = () => {
             <h2 className="mb-6 text-lg font-bold text-pink-400">Quick Links</h2>
             <ul className="text-gray-300">
               <li className="mb-3">
-                <Link to="/about" className="hover:text-pink-400 transition-colors">About Us</Link>
+                <Link to="/aboutus" className="hover:text-pink-400 transition-colors">About Us</Link>
               </li>
               <li className="mb-3">
                 <Link to="/login" className="hover:text-pink-400 transition-colors">Login</Link>
