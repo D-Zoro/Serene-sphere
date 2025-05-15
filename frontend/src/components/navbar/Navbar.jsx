@@ -159,7 +159,7 @@ const Navbar = () => {
               Quiz
             </a>
             <a
-              href={`/${user}/anonymoussharing`}
+              href={`/anonymoussharing`}
               className={Linkiclass}
               style={{ fontFamily: "'Poppins', sans-serif" }}
             >
