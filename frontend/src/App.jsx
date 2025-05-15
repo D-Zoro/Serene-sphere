@@ -19,8 +19,10 @@ import NotFound from "./components/404/404";
 import Aitheraphy from "./components/Ai/Aitheraphy";
 import Profile from "./components/profile/profile";
 import Anony from "./components/anonymoussharing/anosharing"
+
 import MoodTracker from "./components/mood/MoodTracker";
 import Quiz from "./components/quiz/Quiz";
+
  //authorized router uncomment later;
 const PrivateRoute=({ children }) => {
   const{ username: usernameFromUrl }=useParams(); //get username from url
@@ -48,8 +50,10 @@ function App() {
         <Route path="/:username/therapist" element={<PrivateRoute><Aitheraphy/></PrivateRoute>} /> 
         <Route path="/:username/profile" element={<PrivateRoute><Profile/></PrivateRoute>} />
         <Route path="/anonymousSharing" element={<Anony/>} />
+
         <Route path="/:username/mood" element={<PrivateRoute><MoodTracker/></PrivateRoute>} />
         <Route path="/:username/quiz" element={<PrivateRoute><Quiz/></PrivateRoute>} />
+
         {/* sign up */}
         {/* aboutus */}
         {/* etc etc */}

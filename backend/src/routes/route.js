@@ -10,6 +10,7 @@ import {
     deleteChatHistory,
     deleteMultipleChatHistories
 } from '../controllers/chat-controller.js';
+
 import passport from 'passport';
 import '../config/passportConfig.js';
 import multer from 'multer';
@@ -26,9 +27,11 @@ router.get('/delete-user/:username', deleteUser);
 router.get('/:username/getuserdetails', getUserDetails);
 //route.patch('/update-user/:username', updateUser);
 
+
 //anonymous routes
 router.get('/anonymouPosts', getAnonymousPosts);
 router.post('/createAnonymousPost', createAnonymousPost);
+
 
 //Quiz and mood tracking routes
 router.post('/submitQuiz', submitQuiz);
@@ -41,6 +44,9 @@ router.post('/chathistory', createChatHistory);
 router.put('/chathistory/:id', updateChatHistory);
 router.delete('/chathistory/:id', deleteChatHistory);
 router.post('/chathistories/delete', deleteMultipleChatHistories);
+
+//Journals routes
+
 
 //other routes
 
