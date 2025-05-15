@@ -308,7 +308,7 @@ const Navbar = () => {
                 </a>
                 <br />
                 <a
-                  href={`/${user}/anonymoussharing`}
+                  href="/anonymoussharing"
                   className={Linkiclass1}
                   style={{ fontFamily: "'Poppins', sans-serif" }}
                 >
