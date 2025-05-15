@@ -18,7 +18,7 @@ import Signup from "./components/Signup/Signup";
 import NotFound from "./components/404/404";
 import Aitheraphy from "./components/Ai/Aitheraphy";
 import Profile from "./components/profile/profile";
-
+import Anony from "./components/anonymoussharing/anosharing"
  //authorized router uncomment later;
 const PrivateRoute=({ children }) => {
   const{ username: usernameFromUrl }=useParams(); //get username from url
@@ -45,6 +45,7 @@ function App() {
         <Route path="/*" element={<NotFound/>}/>
         <Route path="/:username/therapist" element={<PrivateRoute><Aitheraphy/></PrivateRoute>} /> 
         <Route path="/:username/profile" element={<PrivateRoute><Profile/></PrivateRoute>} />
+        <Route path="/anonymousSharing" element={<Anony/>} />
         {/* sign up */}
         {/* aboutus */}
         {/* etc etc */}
